@@ -141,7 +141,21 @@ class ToolTip(object):
     def tkinter_widget_enter(self, event=None):
         """ Mouse Cursor has Entered Tkinter widget, display tooltip """
         self.widget.update()                                                    #
-        self.tw = tk.Toplevel(self.widget)                                      #   Create a toplevel widget
+        print("*** Test ***")
+        #print("Info ", self.canvas.itemcget(self.widget, "SystemWindowFrame"))
+        #self.tw = tk.Toplevel(self.widget)                                      #   Create a toplevel widget
+
+        if self.widget.winfo_exists():                                         # Prevents drawing on a widget that doesn't exist
+            parentName = self.widget.winfo_parent()
+            parent     = self.widget._nametowidget(parentName)                 # event.widget is your widget
+            frameParentName = parent.winfo_parent()
+            frameParent     = parent._nametowidget(frameParentName)            # parent is your widget
+        else:                                                                  # Exit if the widget doesn't exist (do I need to clean house at this point?)
+            return
+
+
+
+        self.tw = tk.Toplevel(parent)
         self.tw.overrideredirect(True)                                          #   No frame for the widget
         scr_w = self.widget.winfo_screenwidth()                                 #   Get screen resolution width
         scr_h = self.widget.winfo_screenheight()                                #   Get screen resolution height
@@ -177,7 +191,7 @@ class ToolTip(object):
                     y = w_posy - t_height                                       #   Position it above widget
                 else:
                     y = w_posy + w_height                                       #   Position it below widget
-                if t_width + self.widget.winfo_rootx() + w_width + 5 > scr_w:   #   Check if ToolTip is out of screen rigth
+                if t_width + self.widget.winfo_rootx() + w_width + 5 > scr_w:   #   Check if ToolTip is out of screen right
                     x = w_posx - t_width - 5                                    #   Position it on the left
                 else:
                     x = w_posx + w_width + 5                                    #   Position it on the right
@@ -200,7 +214,6 @@ class ToolTip(object):
                     if debugging == True: print(self.__dict__.keys())
                     del self.tw                                                     #   Delete handler from List
                     if debugging == True: print(self.__dict__.keys())
-
         except:
             pass
 
