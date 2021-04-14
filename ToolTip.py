@@ -141,7 +141,7 @@ class ToolTip(object):
     def tkinter_widget_enter(self, event=None):
         """ Mouse Cursor has Entered Tkinter widget, display tooltip """
         self.widget.update()                                                    #
-        print("*** Test ***")
+        if debugging == True: print("*** Test ***")
         #print("Info ", self.canvas.itemcget(self.widget, "SystemWindowFrame"))
         #self.tw = tk.Toplevel(self.widget)                                      #   Create a toplevel widget
 
