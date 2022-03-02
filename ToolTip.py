@@ -423,7 +423,7 @@ class ToolTip(object):
     def onClick(self, event):
         if debugging == True: print("Click Relative Coordinates in canvas: ", event.x, event.y)
         if debugging == True: print("Click Absolute Coordinates in canvas", self.window.winfo_pointerx(), self.window.winfo_pointery())
-        if debugging == True: print("test")
+        if debugging == True: print("testjkjlk")
 
 
 
