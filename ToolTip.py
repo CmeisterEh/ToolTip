@@ -28,6 +28,8 @@ import math
 ###    V 2.0.2     Feb 8, 2021  Multiple Event handlers tied to one widget will cause one to replace another
 ###                             Resolved by using "add = '+'" option to ensure event handler is added to a list of
 ###                             operations to preform upon event.
+###
+###
 
 debugging = False
 VERSION     = (2,0,2)
@@ -138,14 +140,18 @@ class ToolTip(object):
             self.bg = bg                                                        #   background color
 
 
+
+
+
     def tkinter_widget_enter(self, event=None):
         """ Mouse Cursor has Entered Tkinter widget, display tooltip """
-        self.widget.update()                                                    #
+        #self.widget.update()                                                    #
         if debugging == True: print("*** Test ***")
         #print("Info ", self.canvas.itemcget(self.widget, "SystemWindowFrame"))
         #self.tw = tk.Toplevel(self.widget)                                      #   Create a toplevel widget
 
-        if self.widget.winfo_exists():                                         # Prevents drawing on a widget that doesn't exist
+        #if self.widget.winfo_exists():                                         # Prevents drawing on a widget that doesn't exist
+        if True:
             parentName = self.widget.winfo_parent()
             parent     = self.widget._nametowidget(parentName)                 # event.widget is your widget
             frameParentName = parent.winfo_parent()
@@ -417,6 +423,8 @@ class ToolTip(object):
     def onClick(self, event):
         if debugging == True: print("Click Relative Coordinates in canvas: ", event.x, event.y)
         if debugging == True: print("Click Absolute Coordinates in canvas", self.window.winfo_pointerx(), self.window.winfo_pointery())
+        if debugging == True: print("test")
+
 
 
 
@@ -475,23 +483,6 @@ if __name__ == "__main__":
     canvas_window2_scrolly.pack(side = tk.RIGHT, expand = tk.YES, fill = tk.Y)
     canvas_window2.pack(expand = tk.YES, fill = tk.BOTH)
 
-    """
-
-    parent1 = canvas_window2.winfo_toplevel()
-
-    print(    parent1 is root)
-    print(    parent1 is canvas_window1)
-    print(    parent1 is canvas_window2)
-
-    parent2 = canvas_window2.winfo_parent()
-
-    print( parent2 is root)
-    print( parent2 is canvas_window1         )
-    print( parent2 is canvas_window2)
-
-    parent3 = parent2.winfo_parent()
-
-    """
 
 
 
